@@ -176,14 +176,14 @@ function seekTimeUpdate() {
         var cursecs = Math.floor(audio.currentTime - curmins * 60); 
         var durmins = Math.floor(audio.duration / 60); 
         var dursecs = Math.floor(audio.duration - durmins * 60); 
-        if(cursecs < 10) { cursecs = "0"+cursecs; }
-        if(dursecs < 10) { dursecs = "0"+dursecs; }
-        if(curmins < 10) { curmins = "0"+curmins; }
-        if(durmins < 10) { durmins = "0"+durmins; }
-        currentTimeText.innerHTML = curmins+":"+cursecs;
-        durationTimeText.innerHTML = durmins+":"+dursecs;
+        if(cursecs < 10) { cursecs = "0" + cursecs; }
+        if(dursecs < 10) { dursecs = "0" + dursecs; }
+        if(curmins < 10) { curmins = "0" + curmins; }
+        if(durmins < 10) { durmins = "0" + durmins; }
+        currentTimeText.innerHTML = curmins + ":" + cursecs;
+        durationTimeText.innerHTML = durmins + ":" + dursecs;
     } else {
-        currentTimeText.innerHTML = "00"+":"+"00";
-        durationTimeText.innerHTML = "00"+":"+"00";
+        currentTimeText.innerHTML = "00" + ":" + "00";
+        durationTimeText.innerHTML = "00" + ":" + "00";
     }
 }

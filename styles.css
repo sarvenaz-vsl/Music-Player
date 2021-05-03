@@ -10,7 +10,7 @@
 html {
     --bg: #f5f6f7;
     --color-text: #9c9c9c;
-    --banner: #333333;
+    --banner: #3d3d3d;
     --color-shadow: -4px -2px 4px 0 #ffffff,
                     4px 2px 6px 0 #dfe4ea;
     --color-inset-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.8),
@@ -18,7 +18,7 @@ html {
 }
 
 html[data-theme='dark'] {
-    --bg: #121212;
+    --bg: #272727;
     --color-text: #e2e2e2;
     --banner: #fefefe;
     --color-shadow: -3px -3px 10px rgba(255, 255, 255, 0.05),
@@ -30,6 +30,7 @@ html[data-theme='dark'] {
 body {
     background: var(--bg);
     color: var(--color-text);
+    height: 100vh;
 }
 
 a {
@@ -38,7 +39,7 @@ a {
 
 .player {
     width: 80%;
-    min-height: 550px;
+    /* min-height: 550px; */
     max-width: 300px;
     padding: 3rem 1.25rem;
     margin: 2rem auto;
@@ -93,7 +94,7 @@ input[type="checkbox"] {
 }
 
 .information h1 {
-    color: black;
+    color: var(--color-text);
     font-weight: 500;
     margin-bottom: 0.5rem;
 }
@@ -121,7 +122,7 @@ input[type="checkbox"] {
 }
 
 .seekslider {
-    width: 100px;
+    width: 200px;
     height: 3px;
     -webkit-appearance: none;
     border-radius: 10px;
@@ -129,7 +130,7 @@ input[type="checkbox"] {
     z-index: 3;
     outline: none;
     position: fixed;
-    margin-left: 82px;
+    margin-left: 32px;
     margin-top: 10px;
 }
 
