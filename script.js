@@ -51,34 +51,17 @@ playlist_artist.innerHTML = artists[playlist_index];
 playBtn.addEventListener('click', playPause);
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
+seekslider.addEventListener('click', setSeek);
+audio.addEventListener('timeupdate', function() { seekTimeUpdate(); })
+audio.addEventListener('ended', function() { switchTrack(); })
+repeat.addEventListener('click',loop);
+randomSong.addEventListener('click',random);
 
-// progress-bar
-var seeking = false;
-seekslider.addEventListener('mousedown', function(event) {
-    seeking = true;
-    seek(event);
-})
-seekslider.addEventListener('mousemove', function(event) {
-    seek(event);
-})
-seekslider.addEventListener('mouseup', function() {
-    seeking = false;
-})
-
-
-audio.addEventListener('timeupdate', function() {
-    seekTimeUpdate();
-})
-
-audio.addEventListener('ended', function() {
-    switchTrack();
-})
-
-repeat.addEventListener("click",loop);
-randomSong.addEventListener("click",random);
-
+// Functions
 function fetchMusicDetail() {
     $("#image").attr("src", poster[playlist_index]);
+    
+    document.querySelector(".image").classList.add("play");
 
     playlist_status.innerHTML = title[playlist_index];
     playlist_artist.innerHTML = artists[playlist_index];
@@ -131,19 +114,13 @@ function prevSong() {
 
 function playPause() {
     if(audio.paused) {
-        var playPromise = audio.play();
-        if (playPromise !== undefined) {
-            playPromise.then(function() {
-              // Automatic playback started!
-            }).catch(function(error) {
-              // Automatic playback failed.
-              // Show a UI element to let the user manually start playback.
-            });
-          }
+        audio.play();
         document.querySelector(".playPause").classList.add("active");
+        document.querySelector(".image").classList.add("play");
     } else {
         audio.pause();
         document.querySelector(".playPause").classList.remove("active");
+        document.querySelector("#image").classList.remove("play");
     }
 }
 
@@ -156,16 +133,17 @@ function switchTrack() {
     fetchMusicDetail();
 }
 
-function seek(event) {
-    if(audio.duration == 0) {
-        null
-    } else {
-        if(seeking) {
-            seekslider.value = event.clientX - seekslider.offsetLeft;
-            seekto = audio.duration * (seekslider.value / 100);
-            audio.currentTime = seekto;
-        }
-    }
+function seek(e) {
+    const {duration, currentTime} = e.srcElement;
+    const progressPercent = (currentTime / duration) * 100;
+    seekslider.style.width = `${progressPercent}%`;
+}
+
+function setSeek(e) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const duration = audio.duration;
+    audio.currentTime = (clickX / width) * duration;
 }
 
 function seekTimeUpdate() {
