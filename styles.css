@@ -15,8 +15,6 @@ html {
                     4px 2px 6px 0 #dfe4ea;
     --color-inset-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.8),
                         inset 2px 2px 6px rgba(0, 0, 0, 0.1);
-    --color-shadow-hover: -4px -2px 4px 0px rgba(0, 0, 0, 0.205),
-    4px 2px 4px 0px rgba(0, 0, 0, 0.205);
 }
 
 html[data-theme='dark'] {
@@ -59,7 +57,7 @@ a {
     align-items: center;
 }
 
-.header .button {
+.header > .button {
     width: 2rem;
     height: 2rem;
     display: grid;
@@ -68,10 +66,6 @@ a {
     background: var(--bg);
     box-shadow: var(--color-shadow);
     border-radius: 5px;
-}
-
-.header .button:hover {
-    box-shadow: var(--color-shadow-hover);
 }
 
 label {
@@ -122,6 +116,10 @@ input[type="checkbox"] {
     justify-content: space-between;
 }
 
+.progress-time > p {
+    font-size: 0.65rem;
+}
+
 .seekslider {
     width: 100px;
     height: 3px;
@@ -168,10 +166,6 @@ input[type="checkbox"] {
     justify-content: center;
     align-items: center;
 }
-/* 
-.button:hover {
-    box-shadow: var(--color-shadow-hover);
-} */
 
 .button-sm {
     width: 2rem;
@@ -191,14 +185,14 @@ input[type="checkbox"] {
     opacity: 1;
 }
 
-.playPause:active {
+.playPause.active {
     box-shadow: var(--color-inset-shadow);
 }
 
 .shuffle:active,
 .next:active,
 .prev:active,
-.loop:active {
+.loop.active {
     box-shadow: var(--color-inset-shadow);
 }
 
@@ -210,11 +204,11 @@ input[type="checkbox"] {
     display: none;
 }
 
-.playPause:active .fa-play {
+.playPause.active .fa-play {
     display: none;
 }
 
-.playPause:active .fa-pause {
+.playPause.active .fa-pause {
     display: block;
 }
 
