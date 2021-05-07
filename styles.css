@@ -176,6 +176,31 @@ input[type="checkbox"] {
     font-size: 0.85rem;
 }
 
+ul li.playing {
+    color: #ed78f8;
+    pointer-events: none;
+}
+
+.music-list li .fa-play-circle {
+    padding-top: 10px;
+    font-size: 30px;
+    display: block;
+}
+
+.music-list li.playing .fa-play-circle {
+    display: none;
+}
+
+.music-list li .fa-pause-circle {
+    display: none;
+}
+
+.music-list li.playing .fa-pause-circle {
+    padding-top: 10px;
+    font-size: 30px;
+    display: block;
+}
+
 .image {
     display: block;
     width: 175px;
