@@ -17,6 +17,8 @@ html {
                         inset 2px 2px 6px rgba(0, 0, 0, 0.1);
     --color-around-image: 4px solid #dcdfe2;
     --color-slider: #e4e4e4;
+    --color-music-list-header: #b9b9b9;
+    --color-list-border: 1px solid #e5e5e5;
 }
 
 html[data-theme='dark'] {
@@ -29,6 +31,8 @@ html[data-theme='dark'] {
                         inset 2px 2px 6px rgba(0, 0, 0, 0.8);
     --color-around-image: 4px solid #1a1a1a;
     --color-slider: #636363;
+    --color-music-list-header: #636363;
+    --color-list-border: 1px solid #636363;
 }
 
 body {
@@ -50,6 +54,7 @@ a {
     box-shadow: var(--color-shadow);
     border-radius: 15px;
     position: relative;
+    overflow: hidden;
 }
 
 .header {
@@ -72,6 +77,10 @@ a {
     border-radius: 5px;
 }
 
+#more-music {
+    cursor: pointer;
+}
+
 label {
     cursor: pointer;
 }
@@ -80,6 +89,92 @@ input[type="checkbox"] {
     -webkit-appearance: none;
 }
 
+.music-list {
+    position: absolute;
+    left: 0;
+    bottom: -59.7%;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--bg);
+    border-radius: 15px;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 15px 30px;
+    transition: all 0.14s ease-out;
+    z-index: 1;
+}
+
+.show {
+    bottom: 0;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 7;
+}
+
+.music-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-music-list-header);
+}
+
+.music-list .music-list-header .row {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.music-list-header .row i {
+    cursor: default;
+}
+
+.music-list-header .fa-times {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.music-list-header .row span {
+    margin-left: 5px;
+}
+
+.music-list ul {
+    margin: 10px 0;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.music-list ul::-webkit-scrollbar {
+    width: 0px;
+}
+
+.music-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    border-bottom: var(--color-list-border);
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.music-list li:last-child {
+    border-bottom: none;
+}
+
+.music-list li span {
+    font-size: 0.9rem;
+}
+
+.music-list li p {
+    font-size: 0.9rem;
+    opacity: 0.5;
+}
+
+.music-list li .audio-duration {
+    font-size: 0.85rem;
+}
 
 .image {
     display: block;
@@ -142,7 +237,7 @@ input[type="checkbox"] {
 }
 
 .progress-time {
-    padding: 3px 5px;
+    padding: 10px 5px;
     color: var(--color-text);
     font-weight: bold;
     display: flex;
@@ -188,7 +283,7 @@ input[type="checkbox"] {
 }
 
 .buttons {
-    margin: 2rem 0;
+    margin: 0.2rem 0;
     list-style: none;
     display: flex;
     align-items: center;

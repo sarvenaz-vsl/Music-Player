@@ -1,5 +1,3 @@
-let seekto;
-
 //  theme
 let checkbox = document.querySelector('input[name = theme]');
 checkbox.addEventListener('change', function() {
@@ -40,32 +38,47 @@ let durationTimeText = document.getElementById("durationTimeText");
 let playlist_status = document.getElementById("playlist_status");
 let playlist_artist = document.getElementById("playlist_artist");
 let seekslider = document.querySelector("#seekslider");
-let progress = document.querySelector('.progress');
+let progress = document.querySelector(".progress");
+let musicList = document.querySelector(".music-list");
+let showMoreBtn = document.querySelector("#more-music");
+let hideMusicBtn = document.querySelector(".fa-times");
 
 var audio = new Audio();
 audio.src = dir + playlist[0] + ext;
 audio.loop = false;
 
-playlist_status.innerHTML = title[playlist_index];
-playlist_artist.innerHTML = artists[playlist_index];
 
+window.addEventListener('load', () => { 
+    loadMusic(playlist_index); 
+    playingNow();
+});
 playBtn.addEventListener('click', playPause);
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 audio.addEventListener('timeupdate', seek);
-audio.addEventListener('ended', function() { switchTrack(); })
+audio.addEventListener('ended', function() { switchTrack(); });
 repeat.addEventListener('click',loop);
 randomSong.addEventListener('click',random);
-
+showMoreBtn.addEventListener('click', () => { musicList.classList.toggle("show"); });
+hideMusicBtn.addEventListener('click', () => { showMoreBtn.click(); });
 progress.addEventListener('click', (e) => {
     let progressWidthval = progress.clientWidth;
     let clickedOffsetX = e.offsetX;
     let songDuration = audio.duration;
     audio.currentTime = (clickedOffsetX / progressWidthval) * songDuration;
+    if(audio.paused) {
+        audio.play();
+        document.querySelector(".playPause").classList.add("active");
+        document.querySelector(".image").classList.add("play");
+    }
 });
 
-
 // Functions
+function loadMusic() {
+    playlist_status.innerHTML = title[playlist_index];
+    playlist_artist.innerHTML = artists[playlist_index];
+}
+
 function fetchMusicDetail() {
     $("#image").attr("src", poster[playlist_index]);
     
@@ -75,7 +88,7 @@ function fetchMusicDetail() {
     playlist_artist.innerHTML = artists[playlist_index];
 
     audio.src = dir + playlist[playlist_index] + ext;
-    audio.play();
+    audio.play();    
 }
 
 function getRandomNumber(min, max) {
@@ -164,4 +177,43 @@ function seekTimeUpdate() {
         currentTimeText.innerHTML = "00" + ":" + "00";
         durationTimeText.innerHTML = "00" + ":" + "00";
     }
+}
+const ulTag = document.querySelector("ul");
+for(i = 0; i < playlist.length; i++) {
+    
+    let liTag = `<li li-index="${i}" li-name="${artists[i]}">
+                    <div class="row">
+                        <span>${title[i]}</span>
+                        <p>${artists[i]}</p>
+                    </div>
+                    
+                </li>`;
+    ulTag.insertAdjacentHTML("beforeend", liTag);
+
+   
+}
+
+const allLiTags = ulTag.querySelectorAll("li");
+function playingNow() {
+    for(j = 0; j < allLiTags.length; j++) {
+        if(allLiTags[j].getAttribute("li-name") == playlist_index) {
+            allLiTags[j].classList.add("playing");
+        }
+        allLiTags[j].setAttribute("onclick", "clicked(this)")
+    }
+}
+
+function clicked(element) {
+    let getLiIndex = element.getAttribute("li-index");
+    playlist_index = getLiIndex;
+    loadMusic(playlist_index);
+    fetchMusicDetail();
+    playPause();
+    if(audio.paused) {
+        audio.play();
+        document.querySelector(".playPause").classList.add("active");
+        document.querySelector(".image").classList.add("play");
+    }
+    playingNow();
+    showMoreBtn.click();
 }

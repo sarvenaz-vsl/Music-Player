@@ -12,9 +12,23 @@
 <body>
     <main class="player">
         <div class="header">
-            <a href="#" class="button">
-                <i class="fas fa-bars"></i>
-            </a>
+            
+            <div class="button">
+                <i class="fas fa-bars" id="more-music"></i>
+            </div>
+            <div class="music-list">
+                <div class="music-list-header">
+                    <div class="row">
+                        <i class="fas fa-bars"></i>
+                        <span>Music List</span>
+                    </div>
+                    <i class="fas fa-times"></i>
+                </div>
+                <ul id="ul-list">
+                    
+                </ul>
+            </div>
+
             <p>Music Player</p>
             <a href="#" class="button">
                 <label>
@@ -34,12 +48,12 @@
         </div>
 
         <div class="progress">
+            <div class="progress-bar">
+                <div class="seekslider" id="seekslider"></div>
+            </div>
             <div class="progress-time">
                 <span id="currentTimeText" class="left">00:00</span>
                 <span id="durationTimeText" class="right">00:00</span>
-            </div>
-            <div class="progress-bar">
-                <div class="seekslider" id="seekslider"></div>
             </div>
         </div>
 
