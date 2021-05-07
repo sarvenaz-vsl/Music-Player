@@ -9,10 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <title>Music Player</title>
 </head>
-<body>
+<body>   
+    
+    <div id="bg-image">
+        <div id="blackLayer"></div>
+        <img src="/img/1.jpg" alt="" id="bgImage">
+    </div>
+
     <main class="player">
+        
         <div class="header">
-            
             <div class="button">
                 <i class="fas fa-bars" id="more-music"></i>
             </div>
@@ -79,7 +85,23 @@
             </span>
         </ul>
 
-        <div class="bar"></div>
+        <div id="volume-container">
+            <span id="mute-btn">
+                <i class="fas fa-volume-mute"></i>
+            </span>
+            
+            <input type="range" class="slider" id="volumeslider" min="0"
+            max="100" value="100" step="1">
+
+            <span id="volume-md-btn">
+                <i class="fas fa-volume-down"></i>
+            </span>
+
+            <span id="volume-up-btn">
+                <i class="fas fa-volume-up"></i>
+            </span>     
+        </div>
+
     </main>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

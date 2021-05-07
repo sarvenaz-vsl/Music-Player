@@ -42,6 +42,10 @@ let progress = document.querySelector(".progress");
 let musicList = document.querySelector(".music-list");
 let showMoreBtn = document.querySelector("#more-music");
 let hideMusicBtn = document.querySelector(".fa-times");
+let muteBtn = document.getElementById("mute-btn");
+let volumeUpBtn = document.getElementById("volume-up-btn");
+let volumeSlider = document.getElementById("volumeslider");
+let bgImage = document.getElementById("bg-image");
 
 var audio = new Audio();
 audio.src = dir + playlist[0] + ext;
@@ -60,6 +64,8 @@ repeat.addEventListener('click',loop);
 randomSong.addEventListener('click',random);
 showMoreBtn.addEventListener('click', () => { musicList.classList.toggle("show"); });
 hideMusicBtn.addEventListener('click', () => { showMoreBtn.click(); });
+muteBtn.addEventListener('click', mute);
+volumeSlider.addEventListener('mousemove', setVolume);
 progress.addEventListener('click', (e) => {
     let progressWidthval = progress.clientWidth;
     let clickedOffsetX = e.offsetX;
@@ -77,6 +83,7 @@ progress.addEventListener('click', (e) => {
 
 function fetchMusicDetail() {
     $("#image").attr("src", poster[playlist_index]);
+    $("#bgImage").attr("src", poster[playlist_index]);
     
     document.querySelector(".image").classList.add("play");
 
@@ -212,6 +219,9 @@ function playingNow() {
         
         allLiTags[j].setAttribute("onclick", "clicked(this)")
     }
+    if(audio.muted) {
+        audio.muted = false;
+    }
 }
 
 function clicked(element) {
@@ -225,4 +235,23 @@ function clicked(element) {
         document.querySelector(".image").classList.add("play");
     }
     playingNow();
+}
+
+function mute() {
+    if(audio.muted) {
+        audio.muted = false;
+    } else {
+        audio.muted = true;
+    }
+}
+
+function setVolume() {
+    audio.volume = (volumeSlider.value) / 100;
+    if(audio.volume < 0.5) { 
+        document.querySelector("#volume-up-btn").classList.add("volume-down");
+        document.querySelector("#volume-md-btn").classList.add("volume-down");
+    } else if (audio.volume >= 0.5) {
+        document.querySelector("#volume-up-btn").classList.remove("volume-down");
+        document.querySelector("#volume-md-btn").classList.remove("volume-down");
+    }
 }
