@@ -12,10 +12,10 @@ checkbox.addEventListener('change', function() {
 
 let playlist = ["music-1", "music-2", "music-3", "music-4", "music-5", "music-6"];
 
-let title = ["Cartoon - On & On" , "Slow" , "Sunlight","Everything","Last Heroes",
+let title = ["Slow", "Cartoon - On & On" , "Sunlight","Everything","Last Heroes",
 "Fearless"];
 
-let artists = ["Daniel Levi", "Diviners-X-Riell","Nilka","Jone","AERYN","Chris Linton"];
+let artists = ["Diviners-X-Riell", "Daniel Levi", "Nilka","Jone","AERYN","Chris Linton"];
 
 let poster = ["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg","img/6.jpg"]
 
